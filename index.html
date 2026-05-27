@@ -17,6 +17,7 @@
     --rose: #d4846a;
     --green: #6a9e7a;
     --border: #e2d5c3;
+    --blue: #6a8fa0;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,793 +29,540 @@
     min-height: 100vh;
   }
 
-  /* Decorative background */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background: 
+    background:
       radial-gradient(ellipse at 10% 20%, rgba(201,169,110,0.08) 0%, transparent 50%),
       radial-gradient(ellipse at 90% 80%, rgba(212,132,106,0.06) 0%, transparent 50%);
     pointer-events: none;
     z-index: 0;
   }
 
-  .container {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 20px 16px 60px;
-    position: relative;
-    z-index: 1;
-  }
+  .container { max-width: 780px; margin: 0 auto; padding: 20px 16px 80px; position: relative; z-index: 1; }
 
-  /* Header */
-  .header {
-    text-align: center;
-    padding: 48px 0 36px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 40px;
-  }
+  .header { text-align: center; padding: 48px 0 36px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+  .header-ornament { font-family: 'Amiri', serif; font-size: 28px; color: var(--gold); margin-bottom: 12px; letter-spacing: 8px; }
+  .header h1 { font-size: 32px; font-weight: 800; color: var(--deep); line-height: 1.3; margin-bottom: 8px; }
+  .header p { color: var(--soft); font-size: 15px; font-weight: 300; line-height: 1.7; }
 
-  .header-ornament {
-    font-family: 'Amiri', serif;
-    font-size: 28px;
-    color: var(--gold);
-    margin-bottom: 12px;
-    letter-spacing: 8px;
-  }
-
-  .header h1 {
-    font-size: 32px;
-    font-weight: 800;
-    color: var(--deep);
-    line-height: 1.3;
-    margin-bottom: 8px;
-  }
-
-  .header p {
-    color: var(--soft);
-    font-size: 15px;
-    font-weight: 300;
-  }
-
-  /* Role selector */
-  .role-section {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 32px;
-    margin-bottom: 36px;
-    box-shadow: 0 2px 20px rgba(44,31,20,0.04);
-  }
-
-  .role-section h2 {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--mid);
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  .role-buttons {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .role-btn {
-    padding: 14px 32px;
-    border-radius: 50px;
-    border: 2px solid var(--border);
-    background: white;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--mid);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
+  .role-section { background: white; border: 1px solid var(--border); border-radius: 20px; padding: 32px; margin-bottom: 28px; box-shadow: 0 2px 20px rgba(44,31,20,0.04); }
+  .role-section h2 { font-size: 17px; font-weight: 700; color: var(--mid); margin-bottom: 20px; text-align: center; }
+  .role-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .role-btn { padding: 14px 32px; border-radius: 50px; border: 2px solid var(--border); background: white; font-family: 'Tajawal', sans-serif; font-size: 16px; font-weight: 600; color: var(--mid); cursor: pointer; transition: all 0.2s; }
   .role-btn:hover { border-color: var(--gold); color: var(--deep); }
-  .role-btn.active {
-    background: var(--deep);
-    border-color: var(--deep);
-    color: white;
-  }
+  .role-btn.active { background: var(--deep); border-color: var(--deep); color: white; }
 
-  .name-input-wrap {
-    margin-top: 20px;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
+  .view-toggle { display: flex; gap: 8px; background: var(--warm); border-radius: 50px; padding: 4px; margin-bottom: 32px; width: fit-content; margin-inline: auto; flex-wrap: wrap; justify-content: center; }
+  .toggle-btn { padding: 10px 20px; border-radius: 50px; border: none; background: transparent; font-family: 'Tajawal', sans-serif; font-size: 13px; font-weight: 600; color: var(--soft); cursor: pointer; transition: all 0.2s; }
+  .toggle-btn.active { background: white; color: var(--deep); box-shadow: 0 2px 8px rgba(44,31,20,0.1); }
 
-  .name-input-wrap.visible { display: flex; }
-
-  .name-input-wrap label {
-    font-size: 14px;
-    color: var(--soft);
-  }
-
-  .name-input-wrap input {
-    width: 280px;
-    padding: 12px 20px;
-    border: 1.5px solid var(--border);
-    border-radius: 50px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 16px;
-    text-align: center;
-    color: var(--deep);
-    background: var(--cream);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .name-input-wrap input:focus { border-color: var(--gold); }
-
-  /* Sections */
-  .section-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    margin-bottom: 24px;
-    overflow: hidden;
-    box-shadow: 0 2px 20px rgba(44,31,20,0.04);
-    transition: box-shadow 0.2s;
-  }
-
-  .section-card:hover { box-shadow: 0 4px 30px rgba(44,31,20,0.08); }
-
-  .section-header {
-    padding: 24px 28px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    cursor: pointer;
-    user-select: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
-  }
-
+  .section-card { background: white; border: 1px solid var(--border); border-radius: 20px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 20px rgba(44,31,20,0.04); }
+  .section-header { padding: 22px 28px; display: flex; align-items: center; gap: 14px; cursor: pointer; user-select: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
   .section-header.open { border-color: var(--border); }
-
-  .section-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 14px;
-    background: var(--warm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-
+  .section-icon { width: 44px; height: 44px; border-radius: 14px; background: var(--warm); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
   .section-title { flex: 1; }
-  .section-title h3 { font-size: 17px; font-weight: 700; color: var(--deep); }
-  .section-title p { font-size: 13px; color: var(--soft); margin-top: 2px; }
-
-  .section-progress {
-    font-size: 12px;
-    color: var(--gold);
-    font-weight: 600;
-  }
-
-  .chevron {
-    width: 20px;
-    height: 20px;
-    color: var(--soft);
-    transition: transform 0.3s;
-  }
-
+  .section-title h3 { font-size: 16px; font-weight: 700; color: var(--deep); }
+  .section-title p { font-size: 12px; color: var(--soft); margin-top: 2px; }
+  .section-progress { font-size: 12px; color: var(--gold); font-weight: 600; }
+  .chevron { width: 20px; height: 20px; color: var(--soft); transition: transform 0.3s; }
   .section-header.open .chevron { transform: rotate(180deg); }
-
-  .section-body {
-    display: none;
-    padding: 24px 28px;
-  }
-
+  .section-body { display: none; padding: 24px 28px; }
   .section-body.open { display: block; }
 
-  /* Questions */
-  .question {
-    margin-bottom: 28px;
-  }
-
+  .question { margin-bottom: 28px; }
   .question:last-child { margin-bottom: 0; }
+  .question-label { font-size: 15px; font-weight: 600; color: var(--deep); margin-bottom: 10px; line-height: 1.6; display: flex; gap: 10px; }
+  .question-sub { font-size: 13px; color: var(--soft); font-weight: 400; margin-bottom: 10px; margin-right: 36px; line-height: 1.6; }
+  .question-num { width: 26px; height: 26px; background: var(--warm); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--soft); flex-shrink: 0; margin-top: 1px; }
 
-  .question-label {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--deep);
-    margin-bottom: 10px;
-    line-height: 1.6;
-    display: flex;
-    gap: 10px;
-  }
-
-  .question-num {
-    width: 26px;
-    height: 26px;
-    background: var(--warm);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    color: var(--soft);
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  textarea {
-    width: 100%;
-    min-height: 100px;
-    padding: 14px 16px;
-    border: 1.5px solid var(--border);
-    border-radius: 14px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 15px;
-    color: var(--deep);
-    background: var(--cream);
-    resize: vertical;
-    outline: none;
-    transition: border-color 0.2s;
-    line-height: 1.7;
-  }
-
+  textarea { width: 100%; min-height: 90px; padding: 14px 16px; border: 1.5px solid var(--border); border-radius: 14px; font-family: 'Tajawal', sans-serif; font-size: 15px; color: var(--deep); background: var(--cream); resize: vertical; outline: none; transition: border-color 0.2s; line-height: 1.7; }
   textarea:focus { border-color: var(--gold); background: white; }
 
-  /* Checkbox group */
-  .checkbox-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 4px;
-  }
+  /* Scale 1-5 */
+  .scale-wrap { display: flex; flex-direction: column; gap: 8px; }
+  .scale-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--soft); padding: 0 4px; }
+  .scale-options { display: flex; gap: 8px; }
+  .scale-btn { flex: 1; padding: 12px 4px; border: 1.5px solid var(--border); border-radius: 12px; background: var(--cream); font-family: 'Tajawal', sans-serif; font-size: 16px; font-weight: 700; color: var(--soft); cursor: pointer; transition: all 0.15s; text-align: center; }
+  .scale-btn:hover { border-color: var(--gold-light); }
+  .scale-btn.selected { background: var(--deep); border-color: var(--deep); color: white; }
 
-  .checkbox-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.15s;
-    background: var(--cream);
-  }
-
+  /* Checkbox */
+  .checkbox-group { display: flex; flex-direction: column; gap: 8px; }
+  .checkbox-item { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.15s; background: var(--cream); }
   .checkbox-item:hover { border-color: var(--gold-light); background: white; }
   .checkbox-item.checked { border-color: var(--gold); background: #fdf8f0; }
-
-  .checkbox-item input { display: none; }
-  .checkmark {
-    width: 20px; height: 20px;
-    border: 2px solid var(--border);
-    border-radius: 6px;
-    flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.15s;
-  }
-
-  .checkbox-item.checked .checkmark {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: white;
-  }
-
+  .checkmark { width: 20px; height: 20px; border: 2px solid var(--border); border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.15s; font-size: 12px; }
+  .checkbox-item.checked .checkmark { background: var(--gold); border-color: var(--gold); color: white; }
   .checkbox-item span { font-size: 14px; color: var(--deep); }
 
-  /* Save button */
-  .save-section {
-    text-align: center;
-    padding: 40px 0 20px;
-  }
-
-  .save-btn {
-    background: var(--deep);
-    color: white;
-    border: none;
-    padding: 16px 48px;
-    border-radius: 50px;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 4px 20px rgba(44,31,20,0.2);
-  }
-
+  .save-section { text-align: center; padding: 40px 0 20px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .save-btn { background: var(--deep); color: white; border: none; padding: 16px 48px; border-radius: 50px; font-family: 'Tajawal', sans-serif; font-size: 17px; font-weight: 700; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 20px rgba(44,31,20,0.2); }
   .save-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 28px rgba(44,31,20,0.3); }
-  .save-btn:active { transform: translateY(0); }
 
-  /* View toggle */
-  .view-toggle {
-    display: flex;
-    gap: 8px;
-    background: var(--warm);
-    border-radius: 50px;
-    padding: 4px;
-    margin-bottom: 32px;
-    width: fit-content;
-    margin-inline: auto;
-  }
+  .info-banner { background: #f0f7f2; border: 1px solid #b8d9c4; border-radius: 14px; padding: 16px 20px; font-size: 14px; color: #4a7a5a; margin-bottom: 28px; line-height: 1.7; text-align: center; }
+  .warn-banner { background: #fff8f0; border: 1px solid #f5c6bc; border-radius: 14px; padding: 16px 20px; font-size: 14px; color: #c06040; margin-bottom: 28px; line-height: 1.7; text-align: center; }
 
-  .toggle-btn {
-    padding: 10px 24px;
-    border-radius: 50px;
-    border: none;
-    background: transparent;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--soft);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
+  /* Share box */
+  .share-box { background: white; border: 1.5px solid var(--gold-light); border-radius: 20px; padding: 24px 28px; box-shadow: 0 2px 20px rgba(44,31,20,0.04); margin-bottom: 28px; }
+  .share-box h3 { font-size: 15px; font-weight: 700; color: var(--mid); margin-bottom: 14px; }
+  .code-display { background: var(--warm); border-radius: 12px; padding: 14px 18px; font-family: monospace; font-size: 12px; color: var(--deep); word-break: break-all; margin-bottom: 12px; line-height: 1.6; }
+  .share-btn { padding: 10px 20px; border-radius: 50px; border: 1.5px solid var(--border); background: white; font-family: 'Tajawal', sans-serif; font-size: 14px; font-weight: 600; color: var(--mid); cursor: pointer; transition: all 0.2s; }
+  .share-btn:hover { border-color: var(--gold); }
+  .share-btn.primary { background: var(--deep); color: white; border-color: var(--deep); }
+  .import-wrap { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .import-wrap label { font-size: 13px; color: var(--soft); display: block; margin-bottom: 8px; }
+  .import-row { display: flex; gap: 8px; }
+  .import-input { flex: 1; padding: 10px 16px; border: 1.5px solid var(--border); border-radius: 12px; font-family: monospace; font-size: 12px; color: var(--deep); background: var(--cream); outline: none; }
+  .import-input:focus { border-color: var(--gold); }
 
-  .toggle-btn.active {
-    background: white;
-    color: var(--deep);
-    box-shadow: 0 2px 8px rgba(44,31,20,0.1);
-  }
-
-  /* Compare view */
-  .compare-card {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    margin-bottom: 24px;
-    overflow: hidden;
-    box-shadow: 0 2px 20px rgba(44,31,20,0.04);
-  }
-
-  .compare-section-title {
-    padding: 18px 24px;
-    background: var(--warm);
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--mid);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .compare-question {
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--border);
-  }
-
+  /* Compare */
+  .compare-card { background: white; border: 1px solid var(--border); border-radius: 20px; margin-bottom: 24px; overflow: hidden; box-shadow: 0 2px 20px rgba(44,31,20,0.04); }
+  .compare-section-title { padding: 18px 24px; background: var(--warm); font-size: 15px; font-weight: 700; color: var(--mid); display: flex; align-items: center; gap: 10px; }
+  .compare-question { padding: 20px 24px; border-bottom: 1px solid var(--border); }
   .compare-question:last-child { border-bottom: none; }
-
-  .compare-q-text {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--deep);
-    margin-bottom: 14px;
-    line-height: 1.6;
-  }
-
-  .compare-answers {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .answer-box {
-    border-radius: 14px;
-    padding: 14px;
-    border: 1.5px solid;
-  }
-
+  .compare-q-text { font-size: 14px; font-weight: 700; color: var(--deep); margin-bottom: 14px; line-height: 1.6; }
+  .compare-answers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .answer-box { border-radius: 14px; padding: 14px; border: 1.5px solid; }
   .answer-box.person1 { border-color: #e8d5b0; background: #fdf8f0; }
   .answer-box.person2 { border-color: #f5c6bc; background: #fdf5f3; }
-
-  .answer-name {
-    font-size: 12px;
-    font-weight: 700;
-    margin-bottom: 6px;
-  }
-
+  .answer-name { font-size: 12px; font-weight: 700; margin-bottom: 6px; }
   .answer-box.person1 .answer-name { color: var(--gold); }
   .answer-box.person2 .answer-name { color: var(--rose); }
-
-  .answer-text {
-    font-size: 14px;
-    color: var(--deep);
-    line-height: 1.7;
-    white-space: pre-wrap;
-  }
-
+  .answer-text { font-size: 14px; color: var(--deep); line-height: 1.7; white-space: pre-wrap; }
   .no-answer { color: var(--soft); font-style: italic; font-size: 13px; }
 
-  /* Toast */
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(80px);
-    background: var(--deep);
-    color: white;
-    padding: 14px 28px;
-    border-radius: 50px;
-    font-size: 15px;
-    font-weight: 600;
-    z-index: 1000;
-    transition: transform 0.3s ease;
-    text-align: center;
-  }
+  /* Scale compare */
+  .scale-compare { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+  .scale-bar-wrap { flex: 1; }
+  .scale-bar { height: 8px; border-radius: 4px; margin-bottom: 4px; }
+  .scale-bar.p1 { background: var(--gold); }
+  .scale-bar.p2 { background: var(--rose); }
+  .scale-val { font-size: 18px; font-weight: 800; }
+  .scale-val.p1 { color: var(--gold); }
+  .scale-val.p2 { color: var(--rose); }
+  .diff-badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 50px; }
+  .diff-0 { background: #e8f5ee; color: #4a7a5a; }
+  .diff-1 { background: #fdf8f0; color: #a07850; }
+  .diff-2 { background: #fff0e8; color: #c06040; }
+  .diff-3 { background: #ffe8e8; color: #a03030; }
 
+  /* Analysis */
+  .analysis-wrap { background: white; border: 1px solid var(--border); border-radius: 24px; padding: 32px 28px; margin-bottom: 24px; box-shadow: 0 4px 30px rgba(44,31,20,0.08); }
+  .analysis-title { font-size: 20px; font-weight: 800; color: var(--deep); margin-bottom: 6px; text-align: center; }
+  .analysis-sub { font-size: 14px; color: var(--soft); text-align: center; margin-bottom: 28px; }
+
+  .score-circle-wrap { display: flex; justify-content: center; margin-bottom: 32px; }
+  .score-circle { width: 160px; height: 160px; border-radius: 50%; border: 8px solid var(--warm); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
+  .score-num { font-size: 48px; font-weight: 800; line-height: 1; }
+  .score-label { font-size: 13px; color: var(--soft); margin-top: 4px; }
+  .score-desc { font-size: 16px; font-weight: 700; text-align: center; margin-bottom: 24px; }
+
+  .dimensions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .dim-card { border-radius: 16px; padding: 16px; border: 1.5px solid var(--border); }
+  .dim-icon { font-size: 22px; margin-bottom: 8px; }
+  .dim-name { font-size: 13px; font-weight: 700; color: var(--deep); margin-bottom: 6px; }
+  .dim-bar-bg { height: 8px; background: var(--warm); border-radius: 4px; overflow: hidden; }
+  .dim-bar-fill { height: 100%; border-radius: 4px; transition: width 0.8s ease; }
+  .dim-score { font-size: 12px; color: var(--soft); margin-top: 4px; }
+
+  .analysis-section { margin-bottom: 24px; }
+  .analysis-section h3 { font-size: 15px; font-weight: 700; color: var(--mid); margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .strength-item, .growth-item { padding: 12px 16px; border-radius: 12px; margin-bottom: 8px; font-size: 14px; line-height: 1.6; }
+  .strength-item { background: #f0f7f2; border: 1px solid #b8d9c4; color: #2a5a3a; }
+  .growth-item { background: #fff8f0; border: 1px solid #f5d5b0; color: #7a4a20; }
+
+  .couple-type { text-align: center; padding: 20px; background: var(--warm); border-radius: 16px; margin-bottom: 24px; }
+  .couple-type-badge { display: inline-block; background: var(--deep); color: white; font-size: 16px; font-weight: 700; padding: 8px 24px; border-radius: 50px; margin-bottom: 8px; }
+  .couple-type p { font-size: 14px; color: var(--mid); line-height: 1.7; }
+
+  .advice-tip { background: white; border-radius: 12px; padding: 14px 16px; border: 1px solid rgba(0,0,0,0.06); }
+  .advice-tip-title { font-size: 14px; font-weight: 700; color: var(--deep); margin-bottom: 6px; }
+  .advice-tip-body { font-size: 13px; color: var(--mid); line-height: 1.8; }
+
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--deep); color: white; padding: 14px 28px; border-radius: 50px; font-size: 15px; font-weight: 600; z-index: 1000; transition: transform 0.3s ease; text-align: center; white-space: nowrap; }
   .toast.show { transform: translateX(-50%) translateY(0); }
-
-  /* Responsive */
-  @media (max-width: 540px) {
-    .compare-answers { grid-template-columns: 1fr; }
-    .header h1 { font-size: 26px; }
-    .section-header { padding: 18px 20px; }
-    .section-body { padding: 18px 20px; }
-  }
 
   .hidden { display: none !important; }
 
-  .share-box {
-    background: white;
-    border: 1.5px solid var(--gold-light);
-    border-radius: 20px;
-    padding: 24px 28px;
-    box-shadow: 0 2px 20px rgba(44,31,20,0.04);
-  }
-
-  .share-box h3 {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--mid);
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .code-display {
-    background: var(--warm);
-    border-radius: 12px;
-    padding: 14px 18px;
-    font-family: monospace;
-    font-size: 13px;
-    color: var(--deep);
-    word-break: break-all;
-    margin-bottom: 12px;
-    line-height: 1.6;
-  }
-
-  .share-actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .share-btn {
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: 1.5px solid var(--border);
-    background: white;
-    font-family: 'Tajawal', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--mid);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .share-btn:hover { border-color: var(--gold); color: var(--deep); }
-  .share-btn.primary { background: var(--deep); color: white; border-color: var(--deep); }
-
-  .import-wrap {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid var(--border);
-    display: none;
-  }
-
-  .import-wrap.visible { display: block; }
-
-  .import-wrap label { font-size: 13px; color: var(--soft); display: block; margin-bottom: 8px; }
-
-  .import-row { display: flex; gap: 8px; }
-
-  .import-input {
-    flex: 1;
-    padding: 10px 16px;
-    border: 1.5px solid var(--border);
-    border-radius: 12px;
-    font-family: monospace;
-    font-size: 13px;
-    color: var(--deep);
-    background: var(--cream);
-    outline: none;
-  }
-
-  .import-input:focus { border-color: var(--gold); }
-    background: #f0f7f2;
-    border: 1px solid #b8d9c4;
-    border-radius: 14px;
-    padding: 16px 20px;
-    font-size: 14px;
-    color: var(--green);
-    margin-bottom: 28px;
-    line-height: 1.7;
-    text-align: center;
-  }
-
-  .saved-badge {
-    display: inline-block;
-    background: var(--green);
-    color: white;
-    font-size: 12px;
-    font-weight: 700;
-    padding: 3px 12px;
-    border-radius: 50px;
-    margin-right: 8px;
+  @media (max-width: 540px) {
+    .compare-answers { grid-template-columns: 1fr; }
+    .dimensions-grid { grid-template-columns: 1fr; }
+    .header h1 { font-size: 26px; }
+    .section-header { padding: 18px 20px; }
+    .section-body { padding: 18px 20px; }
+    .score-circle { width: 130px; height: 130px; }
+    .score-num { font-size: 38px; }
   }
 </style>
 </head>
 <body>
-
 <div class="container">
-  <!-- Header -->
+
   <div class="header">
     <div class="header-ornament">❧ ✦ ❧</div>
     <h1>حتى تعرفني أكثر 💛</h1>
-    <p>أجب على الأسئلة بصدق، ثم شاركا الإجابات مع بعض وناقشاها</p>
+    <p>أسئلة مبنية على أبحاث علم النفس في العلاقات الزوجية<br>أجب بصدق — ما في إجابة صح أو غلط</p>
   </div>
 
-  <!-- Role & Name -->
   <div class="role-section">
     <h2>أنت من؟</h2>
     <div class="role-buttons">
-      <button class="role-btn" onclick="selectRole('person1')" id="btn-p1">الخطيب 💙</button>
-      <button class="role-btn" onclick="selectRole('person2')" id="btn-p2">الخطيبة 🌸</button>
+      <button class="role-btn" onclick="selectRole('person1')" id="btn-p1">A 💙</button>
+      <button class="role-btn" onclick="selectRole('person2')" id="btn-p2">L 🌸</button>
     </div>
   </div>
 
-  <!-- Share section -->
-  <div id="share-section" style="display:none; margin-bottom:28px;">
-  </div>
+  <div id="share-section"></div>
 
-  <!-- View toggle -->
-  <div class="view-toggle" id="view-toggle" style="display:none">
+  <div class="view-toggle hidden" id="view-toggle">
     <button class="toggle-btn active" onclick="switchView('fill')" id="toggle-fill">أجاوب ✏️</button>
-    <button class="toggle-btn" onclick="switchView('compare')" id="toggle-compare">نقارن الإجابات 👀</button>
+    <button class="toggle-btn" onclick="switchView('compare')" id="toggle-compare">نقارن 👀</button>
+    <button class="toggle-btn" onclick="switchView('analysis')" id="toggle-analysis">التحليل 📊</button>
   </div>
 
-  <!-- Fill mode -->
-  <div id="fill-view"></div>
-
-  <!-- Compare mode -->
+  <div id="fill-view">
+    <div class="info-banner">اختر دورك للبدء ✨</div>
+  </div>
   <div id="compare-view" class="hidden"></div>
+  <div id="analysis-view" class="hidden"></div>
 
-  <div class="save-section" id="save-section" style="display:none">
+  <div class="save-section hidden" id="save-section">
     <button class="save-btn" onclick="saveAnswers()">💾 حفظ إجاباتي</button>
-    <button class="save-btn" onclick="resetAnswers()" style="background:white;color:#d4846a;border:2px solid #d4846a;margin-top:12px;">🗑 مسح إجاباتي</button>
+    <button class="save-btn" onclick="resetAnswers()" style="background:white;color:#d4846a;border:2px solid #d4846a;font-size:15px;padding:12px 32px;">🗑 مسح إجاباتي</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ===== DATA =====
+// =====================
+// SECTIONS & QUESTIONS
+// =====================
 const sections = [
   {
-    id: 'family',
-    icon: '🏡',
-    title: 'العلاقة مع العائلة',
-    desc: 'العلاقة مع الأهل والعائلة',
+    id: 'attachment',
+    icon: '🔗',
+    title: 'نمط التعلق العاطفي',
+    desc: 'كيف تحب وكيف تحتاج أن تُحَب — مبني على نظرية التعلق',
+    scoreKey: 'attachment',
     questions: [
-      { id: 'f1', type: 'text', text: 'اذكر بعض الصفات التي تعجبك في والدَي شريكك. لماذا تعجبك هذه الصفات؟' },
-      { id: 'f2', type: 'text', text: 'ما مقدار التواصل والتدخل الذي تتوقعه أو تريده من أهل الطرف الآخر؟ هل تفضل القرب أم الاستقلالية كقاعدة عامة؟' },
-      { id: 'f3', type: 'text', text: 'كيف تشعر تجاه علاقة شريكك بوالديه؟' },
-      { id: 'f4', type: 'text', text: 'كيف تصف علاقتك بأهل شريكك حالياً؟ وكيف تريدها أن تكون؟' },
-      { id: 'f5', type: 'text', text: 'هل تنظر لأهل شريكك بشكل عام كعون أم كعائق في حياتكما الزوجية؟' },
-      { id: 'f6', type: 'text', text: 'كيف تتخيل العلاقة الزوجية بين والد الزوجة ووالدة الزوج لو تزوجا؟' },
-      { id: 'f7', type: 'text', text: 'كيف تتخيل العلاقة الزوجية بين والدة الزوجة ووالد الزوج لو تزوجا؟' },
+      {
+        id: 'at1', type: 'scale',
+        text: 'لما أحس بضغط أو قلق، أول شيء أبغاه من شريكي هو:',
+        sub: null,
+        scaleMin: 'أكون لوحدي وأعالج الموضوع بنفسي',
+        scaleMax: 'أبغاه/ها قريب مني يسمعني'
+      },
+      {
+        id: 'at2', type: 'scale',
+        text: 'لما يكون شريكي مشغول وما أقدر أوصل له/لها لفترة، أحس:',
+        sub: null,
+        scaleMin: 'مرتاح، أثق إنه/ها بخير',
+        scaleMax: 'أحتاج أتأكد إنه/ها بخير وما صار شيء'
+      },
+      {
+        id: 'at3', type: 'text',
+        text: 'وصّف كيف تتصرف لما تحتاج دعم من شريكك — هل تطلب مباشرة أم تنتظر هو/هي يلاحظ؟',
+        sub: 'كن صريح، ما في إجابة خطأ'
+      },
+      {
+        id: 'at4', type: 'scale',
+        text: 'مدى راحتك في إظهار ضعفك أو خوفك أمام شريكك:',
+        scaleMin: 'صعب عليّ جداً',
+        scaleMax: 'أقدر بكل راحة'
+      },
+      {
+        id: 'at5', type: 'text',
+        text: 'إيش اللي يخليك تحس بالأمان الحقيقي مع شريكك؟ أعطِ مثال من حياتكم.',
+        sub: null
+      }
     ]
   },
   {
     id: 'love',
     icon: '💛',
-    title: 'التعبير عن الحب وتلقيه',
-    desc: 'كيف تحب وكيف تحب أن تُحَب',
+    title: 'لغة الحب والتعبير عنه',
+    desc: 'كيف تعطي الحب وكيف تحتاج تستقبله — Gary Chapman',
+    scoreKey: 'love',
     questions: [
       {
-        id: 'l1', type: 'checkbox',
-        text: 'إذا كانت هناك خمس لغات للحب، فما لغتك الرئيسية؟',
-        options: ['كلمات الثناء والتشجيع', 'خدمة الطرف الآخر وتخفيف أعبائه', 'قضاء وقت جيد معاً', 'اللمسة والقرب الجسدي', 'تقديم الهدايا واستقبالها']
+        id: 'lv1', type: 'checkbox',
+        text: 'أكثر شيء يخليني أحس أني محبوب/ة ومهتم به/ها هو:',
+        sub: 'اختر الأهم لك',
+        options: ['كلام تشجيعي وثناء صادق', 'وقت جيد نقضيه مع بعض بدون شاشات', 'مساعدة عملية تخفف عليّ', 'لمسة حنونة أو قرب جسدي', 'هدية مفاجئة ولو صغيرة']
       },
-      { id: 'l2', type: 'text', text: 'كيف تشعر حيال إظهار المودة في الأماكن العامة؟ هل هناك "قواعد" مهمة يجب أن يعرفها الطرف الآخر؟' },
-      { id: 'l3', type: 'text', text: 'كيف تعبّر عن حبك لشريكك؟ أعطِ أمثلة محددة. وكيف يعبّر هو/هي عن حبه لك؟' },
-      { id: 'l4', type: 'text', text: 'بأي طريقة تستقبل الحب بشكل أفضل؟ وبأي طريقة يستقبله شريكك؟' },
-      { id: 'l5', type: 'text', text: 'كيف كان والداك يعطيان الحب ويستقبلانه؟ وأجدادك أو من كانوا حولك في طفولتك؟' },
-      { id: 'l6', type: 'text', text: 'كيف كنت تتخيل وأنت صغير أنك ستحب وتُحَب حين تكبر؟' },
-      { id: 'l7', type: 'text', text: 'صف تأثير طريقة تعبير عائلتك عن الحب على طريقتك في التعبير عنه لشريكك.' },
-      { id: 'l8', type: 'text', text: 'ما التأثير الذي تعتقد أن تجربة عائلة شريكك ستتركه على طريقته في إظهار المودة لك؟' },
+      {
+        id: 'lv2', type: 'checkbox',
+        text: 'وأنا أعبّر عن حبي، أكثر شيء أفعله طبيعياً هو:',
+        sub: null,
+        options: ['أقول كلام حلو أو أثني عليه/ها', 'أخصص وقت له/لها فقط', 'أساعد وأتصرف بدون ما يطلب', 'أقرّب منه/ها وألمس يده/ها', 'أفكر في هدايا أو مفاجآت']
+      },
+      {
+        id: 'lv3', type: 'text',
+        text: 'اذكر موقف محدد أحسست فيه أن شريكك أحبك بالطريقة اللي تحتاجها فعلاً.',
+        sub: null
+      },
+      {
+        id: 'lv4', type: 'text',
+        text: 'وإيش موقف تمنيت فيه إنه/إنها يعبّر عن حبه بطريقة مختلفة؟ ايش كنت تبغى؟',
+        sub: 'هذا سؤال مهم جداً — كن صريح'
+      },
+      {
+        id: 'lv5', type: 'scale',
+        text: 'مدى إحساسك الحالي بأنك محبوب/ة من شريكك بالطريقة التي تحتاجها:',
+        scaleMin: 'ما أحس بذلك كثيراً',
+        scaleMax: 'أحس بذلك دائماً'
+      }
     ]
   },
   {
-    id: 'comm',
+    id: 'communication',
     icon: '💬',
-    title: 'التواصل الشخصي',
-    desc: 'كيف تتواصلان وتتفاهمان',
+    title: 'طريقة التواصل وحل الخلاف',
+    desc: 'مبني على أبحاث Gottman — أهم عامل في نجاح الزواج',
+    scoreKey: 'communication',
     questions: [
-      { id: 'c1', type: 'text', text: 'كيف تحب أن يريك شريكك ويخبرك بأنك محل تقدير واهتمام؟' },
-      { id: 'c2', type: 'text', text: 'ما أفضل ما في تواصلكما الحالي؟' },
-      { id: 'c3', type: 'text', text: 'ما أكثر شيء يزعجك في تواصلكما الحالي؟' },
-      { id: 'c4', type: 'text', text: 'كيف تفضل أن يطلب منك شريكك تغيير شيء في تصرفاتك أو كلامك؟' },
       {
-        id: 'c5', type: 'checkbox',
-        text: 'متى تشعر أن شريكك يسمعك فعلاً؟ (اختر كل ما ينطبق)',
-        options: ['يتركني أتكلم دون مقاطعة', 'يوافقني على ما أقوله', 'يتيح لي قول أي شيء بحرية', 'يبتسم حين أتكلم', 'ينظر في عيني ويواجهني', 'لا ينفعل أو يتصرف بعدوانية', 'يطرح أسئلة ويعلق بما يُظهر أنه مهتم', 'يُغير رأيه ليفهمني أكثر', 'يُبعد مشتتات الانتباه ويُركز معي', 'يهتم لمشاعري', 'يُقدّر رأيي أكثر من رأي الآخرين']
+        id: 'cm1', type: 'checkbox',
+        text: 'لما يكون بيني وبين شريكي خلاف، أكثر شيء أميل له هو:',
+        sub: null,
+        options: ['أتكلم فوراً وأعبّر عن إحساسي', 'أسكت وأحتاج وقت قبل أتكلم', 'أبتعد مؤقتاً وأعود لما أهدأ', 'أحاول أقلل الموضوع وأتجاوز', 'أنتظر الطرف الثاني يبدأ']
       },
-      { id: 'c6', type: 'text', text: 'بعض الأشياء التي يفعلها شريكي وتجعل من الصعب عليّ أن أفتح قلبي له/لها:' },
-      { id: 'c7', type: 'text', text: 'بعض الأشياء التي يفعلها شريكي وتجعل من السهل عليّ أن أشاركه/ها أفكاري ومشاعري:' },
-      { id: 'c8', type: 'text', text: 'جانب واحد من علاقتنا كنت مترددًا/ة في مناقشته مع شريكي وأريد الآن أن أتحدث عنه:' },
-      { id: 'c9', type: 'text', text: 'طريقتي المعتادة في حل الخلافات هي:' },
-      { id: 'c10', type: 'text', text: 'طريقة شريكي المعتادة في حل الخلافات هي:' },
-      { id: 'c11', type: 'text', text: 'كيف تتوقع أن يتم التسامح والعفو في زواجكما؟ هل العفو سهل عليك؟ هل يصعب عليك أن تعفو عمن آذاك؟' },
+      {
+        id: 'cm2', type: 'scale',
+        text: 'مدى سهولة قول "أنا غلطت وأعتذر" لشريكك:',
+        scaleMin: 'صعب جداً عليّ',
+        scaleMax: 'سهل وطبيعي'
+      },
+      {
+        id: 'cm3', type: 'text',
+        text: 'وصّف آخر خلاف حصل بينكما — كيف بدأ وكيف انتهى؟',
+        sub: 'ما نبحث عن مين غلط — نبغى نفهم النمط'
+      },
+      {
+        id: 'cm4', type: 'scale',
+        text: 'لما أنت تتكلم، أحس إن شريكي يسمعني فعلاً:',
+        scaleMin: 'نادراً',
+        scaleMax: 'دائماً تقريباً'
+      },
+      {
+        id: 'cm5', type: 'text',
+        text: 'في أي موضوع تحس إنكم تتكلمون بصعوبة أو تتجنبانه؟ ولماذا برأيك؟',
+        sub: null
+      },
+      {
+        id: 'cm6', type: 'scale',
+        text: 'مدى راحتك في قول "لا" أو رفض طلب من شريكك لما ما تبغى:',
+        scaleMin: 'صعب عليّ جداً',
+        scaleMax: 'أقدر براحة'
+      }
     ]
   },
   {
-    id: 'conflict',
-    icon: '🌊',
-    title: 'الخلاف والجرح والمصالحة',
-    desc: 'كيف تتعاملان مع الخلافات',
+    id: 'values',
+    icon: '🧭',
+    title: 'القيم والأولويات في الحياة',
+    desc: 'التوافق في القيم هو الأساس الأقوى للزواج الناجح',
+    scoreKey: 'values',
     questions: [
       {
-        id: 'cf1', type: 'checkbox',
-        text: 'حين يؤلمني شريكي بكلام أو تصرف، أنا عادةً أـ (اختر كل ما ينطبق):',
-        options: ['أنسحب وأبتعد', 'أفعل شيئًا لأؤذيه/ها بالمقابل', 'أغضب عليه/عليها', 'ألعب دور الضحية', 'أتظاهر أن كل شيء بخير', 'أعطي إشارات غير مباشرة', 'أدخل في "مزاج"', 'أنتظر منه/منها البدء بالمصالحة']
+        id: 'vl1', type: 'scale',
+        text: 'أهمية الدين والروحانية في حياتك اليومية:',
+        scaleMin: 'ليست أولوية كبيرة',
+        scaleMax: 'أساس كل شيء'
       },
       {
-        id: 'cf2', type: 'checkbox',
-        text: 'أتصرف هكذا لأن (اختر كل ما ينطبق):',
-        options: ['أريد تصفية الجو', 'أريده/ها أن يسمعني', 'نحن مختلفان جداً', 'المصالحة جميلة', 'الضغط يتراكم', 'أريد الاهتمام', 'لا نستطيع الاتفاق', 'أريد شيئاً بشدة', 'أفقد صبري بسرعة', 'هو/هي يبدأ', 'لا يجدي غير ذلك']
+        id: 'vl2', type: 'scale',
+        text: 'أهمية الأهل والعائلة الممتدة في قرارات حياتكم الزوجية:',
+        scaleMin: 'نحن نقرر بشكل مستقل',
+        scaleMax: 'رأي العائلة مهم جداً'
       },
       {
-        id: 'cf3', type: 'checkbox',
-        text: 'أتأذى أكثر من شريكي حين (اختر كل ما ينطبق):',
-        options: ['يُقدّم عمله عليّ', 'يُقدّم علاقة أخرى عليّ', 'يكون مهملاً في الأمور المالية', 'لا يهتم بمظهره/ها', 'يُحرجني أمام الناس', 'يستأثر بالحديث دائماً', 'يترك كل شيء عليّ', 'لا يسمعني', 'يخرج كثيراً مع أصدقائه/ها', 'لا يُعطيني مساحة', 'يرفض طلباتي']
+        id: 'vl3', type: 'scale',
+        text: 'الطموح الوظيفي والنجاح المهني في سلّم أولوياتك:',
+        scaleMin: 'العمل وسيلة وليس غاية',
+        scaleMax: 'النجاح المهني من أهم أهدافي'
       },
-      { id: 'cf4', type: 'text', text: 'كيف تصف أسلوبك في التعامل مع الخلافات؟ وأسلوب شريكك؟ وأسلوب والديك؟' },
       {
-        id: 'cf5', type: 'checkbox',
-        text: 'أسوأ ما في خلافاتنا (اختر كل ما ينطبق):',
-        options: ['التسمية والإهانات', 'العنف الجسدي', 'عدم الوصول لنتيجة أبداً', 'صعوبة الاعتذار', 'استحضار الماضي', 'أنا دائماً الخاسر/ة', 'تكرارها بكثرة', 'طولها', 'لا نحل المشكلة الأصلية', 'الانتقام', 'تأذّي مشاعري']
+        id: 'vl4', type: 'text',
+        text: 'بعد 10 سنين من الزواج — كيف تتخيل حياتكم؟ وين تسكنون؟ ايش تفعلون؟',
+        sub: 'تكلم عن الصورة الكاملة'
       },
-      { id: 'cf6', type: 'text', text: '"الخلاف النظيف" أو "العادل" — ما تعريفك له؟' },
-      { id: 'cf7', type: 'text', text: 'حين كان يحدث خلاف في عائلتك التي نشأت فيها، ماذا كنت تفعل؟' },
-      { id: 'cf8', type: 'text', text: 'في رأيك، ما المفتاح الأهم للتعامل مع الخلاف في الزواج؟' },
+      {
+        id: 'vl5', type: 'scale',
+        text: 'بعد الإنجاب، كيف تتخيل توزيع الأدوار بينكما؟',
+        scaleMin: 'أحد يتفرغ للبيت والأطفال',
+        scaleMax: 'نكمل مسيرتنا المهنية مع التوازن'
+      },
+      {
+        id: 'vl6', type: 'text',
+        text: 'إيش القيمة أو المبدأ اللي لو خالفه شريكك ما تقدر تتجاوزه؟',
+        sub: 'كن صريح جداً هنا'
+      }
     ]
   },
   {
-    id: 'emotional',
-    icon: '🌡',
-    title: 'التجارب الأسبوعية والعادات',
-    desc: 'كيف تتعاملان مع التحديات النفسية',
+    id: 'family',
+    icon: '🏡',
+    title: 'العائلة وتوقعات الزواج',
+    desc: 'تأثير طفولتك على علاقتك — أبحاث إيمي موران',
+    scoreKey: 'family',
     questions: [
-      { id: 'e1', type: 'text', text: 'اكتب 5 كلمات أو عبارات تصف ما تشعر به الآن وأنت تملأ هذا الاستبيان.' },
-      { id: 'e2', type: 'text', text: 'افعل نفس الشيء تخيلاً عن شريكك — ما الذي تعتقد أنه/ها يشعر به الآن؟' },
-      { id: 'e3', type: 'text', text: 'سجّل أفكاراً عن كيفية تعاملك مع التجارب الصعبة مع شريكك. كن واقعياً قدر الإمكان.' },
-      { id: 'e4', type: 'text', text: 'صف أي تجربة مررت بها مع مرشد أو مختص حيث تحدثت عن مشاعرك وعاداتك.' },
-      { id: 'e5', type: 'text', text: 'في رأيك، كيف تتغير العادات الشخصية؟' },
-      { id: 'e6', type: 'text', text: 'في رأيك، كيف تتغير العادات كزوجين؟' },
-    ]
-  },
-  {
-    id: 'interests',
-    icon: '🎯',
-    title: 'الاهتمامات والأولويات',
-    desc: 'ما تشتركان فيه وما يختلفان فيه',
-    questions: [
-      { id: 'i1', type: 'text', text: 'اذكر على الأقل خمسة اهتمامات أو أنشطة مشتركة بينكما. كم مرة تمارسانها تقريباً؟' },
-      { id: 'i2', type: 'text', text: 'اذكر على الأقل خمسة اهتمامات يمتلكها أحدكما دون الآخر (وضّح لمن). كم مرة تُمارَس؟' },
-      { id: 'i3', type: 'text', text: 'رتّب هذه الأولويات الزوجية من 1 (الأهم) إلى 10 (الأقل أهمية): المتعة والراحة كزوجين، الانخراط في المجتمع، تطوير الزواج، النمو الشخصي، العلاقة بالله، الحياة الجنسية، التقدم المادي، العمل أو الدراسة، الصداقات، الأبناء وتربيتهم.' },
-      { id: 'i4', type: 'text', text: 'هل هناك اهتمام مشترك أو منفرد قد يكون مصدر توتر في علاقتكما؟ لماذا؟' },
-      { id: 'i5', type: 'text', text: 'هل تتضمن هواياتك أشخاصاً لا يرتاح لهم شريكك؟' },
-    ]
-  },
-  {
-    id: 'money',
-    icon: '💰',
-    title: 'المال والعمل والتطلعات',
-    desc: 'التوقعات المالية والمهنية',
-    questions: [
-      { id: 'm1', type: 'text', text: 'من سيتولى إدارة الشؤون المالية للأسرة؟ من "يجب" أن يكون المسؤول عن المال؟ لماذا؟' },
-      { id: 'm2', type: 'text', text: 'ما الحد الذي تستطيع أن تنفق فيه دون الرجوع لشريكك أولاً؟ هل يوافق شريكك على هذا؟' },
-      { id: 'm3', type: 'text', text: 'قدّر دخلكما السنوي المشترك بعد الضريبة. كيف ستوزعان النفقات؟ (إيجار، طعام، ملابس، ترفيه، توفير، ديون، إلخ)' },
-      { id: 'm4', type: 'text', text: 'لو واجهتما أزمة مالية مفاجئة، ما أول 3-4 بنود ستقطعانها؟' },
-      { id: 'm5', type: 'text', text: 'لو فُقِد وظيفة أحدكما ولا يوجد عمل في مجاله بالمدينة، ماذا ستفعلان؟ (انتقال؟ إعادة تأهيل؟ تخفيض مستوى المعيشة؟)' },
-      { id: 'm6', type: 'text', text: 'كيف تنظر لمن يريد تغيير مساره المهني بعد سنوات من الدراسة؟' },
-      { id: 'm7', type: 'text', text: 'كيف تشعر حيال عمل الزوجة/الأم خارج البيت بعد إنجاب الأطفال؟' },
-      { id: 'm8', type: 'text', text: 'كيف تشعر حيال عمل الزوج/الأب خارج البيت بعد إنجاب الأطفال؟' },
-      { id: 'm9', type: 'text', text: 'كيف تصف نفسك من حيث عادات الإنفاق؟ (من المقتصد جداً إلى المبذّر جداً). وكيف تصف شريكك؟' },
-      { id: 'm10', type: 'text', text: 'هل لديكما وصية أو خطة ميراث؟ متى تنوون وضعها؟' },
+      {
+        id: 'fm1', type: 'text',
+        text: 'كيف كان الجو العاطفي في البيت اللي كبرت فيه؟ هل كان الحب يُعبَّر عنه بصراحة؟',
+        sub: null
+      },
+      {
+        id: 'fm2', type: 'scale',
+        text: 'مدى تأثير طريقة تربيتك على طريقة تعاملك العاطفي اليوم:',
+        scaleMin: 'تأثير بسيط جداً',
+        scaleMax: 'تأثير كبير جداً'
+      },
+      {
+        id: 'fm3', type: 'text',
+        text: 'شيء واحد تبغى تختلف فيه عن طريقة تعامل والديك مع بعض في زواجك.',
+        sub: null
+      },
+      {
+        id: 'fm4', type: 'scale',
+        text: 'توقعاتك للعلاقة مع أهل شريكك:',
+        scaleMin: 'أفضل حدود واضحة',
+        scaleMax: 'أبغى علاقة قريبة ودافئة'
+      },
+      {
+        id: 'fm5', type: 'text',
+        text: 'إيش أكثر شيء تخاف منه في الزواج — بصراحة تامة؟',
+        sub: 'هذا السؤال الأهم في هذا القسم'
+      }
     ]
   },
   {
     id: 'children',
     icon: '🌱',
-    title: 'الأطفال والتوقعات',
-    desc: 'التخطيط لبناء الأسرة',
+    title: 'الأطفال والتربية',
+    desc: 'التوافق في رؤية التربية يمنع كثيراً من الخلافات',
+    scoreKey: 'children',
     questions: [
-      { id: 'ch1', type: 'text', text: 'صف بعض أجمل ذكرياتك من طفولتك. هل تعتبر طفولتك "سعيدة"؟' },
-      { id: 'ch2', type: 'text', text: 'هل تخططان لإنجاب أطفال؟ كم عدد الأطفال الذي تتمنى؟' },
-      { id: 'ch3', type: 'text', text: 'لو تعذّر عليكما الإنجاب، كيف ستتعاملان مع ذلك؟' },
-      { id: 'ch4', type: 'text', text: 'متى تريد أن يكون طفلكما الأول؟ وما الفارق الزمني الذي تراه مناسباً بين الأطفال؟' },
-      { id: 'ch5', type: 'text', text: 'في جملة واحدة، ماذا يعني لك أن يكون لك طفل؟' },
-      { id: 'ch6', type: 'text', text: 'كيف ستؤثر التربية والإنجاب على زواجكما؟' },
-      { id: 'ch7', type: 'text', text: 'ما أفضل 5 مؤهلات تعتقد أنك تمتلكها كأحد الوالدين؟' },
-      { id: 'ch8', type: 'text', text: 'ما أفضل 5 مؤهلات تعتقد أن شريكك يمتلكها كأحد الوالدين؟' },
-      { id: 'ch9', type: 'text', text: 'ما بعض نقاط ضعفك كأحد الوالدين (أو المحتملة)؟' },
-      { id: 'ch10', type: 'text', text: 'ما التغييرات التي تريد إجراءها في تربية أبنائك مقارنةً بكيفية تربية والديك لك؟' },
-      { id: 'ch11', type: 'text', text: 'كيف تتخيل أسلوبكما معاً في التربية؟' },
+      {
+        id: 'ch1', type: 'scale',
+        text: 'مدى رغبتك في إنجاب أطفال:',
+        scaleMin: 'ما أبغى أطفال',
+        scaleMax: 'أبغى أطفال كثير'
+      },
+      {
+        id: 'ch2', type: 'text',
+        text: 'ما أسلوب التربية اللي تؤمن فيه؟ صارم؟ حنون؟ في المنتصف؟ أعطِ مثال.',
+        sub: null
+      },
+      {
+        id: 'ch3', type: 'scale',
+        text: 'لو اختلفتما في موقف تربوي معين، كيف تتخيل تحلانه؟',
+        scaleMin: 'أحد منا يتنازل للآخر',
+        scaleMax: 'نجلس ونوصل لقرار مشترك دائماً'
+      },
+      {
+        id: 'ch4', type: 'text',
+        text: 'إيش اللي تبغى طفلك يحس به دائماً وهو يكبر في بيتكم؟',
+        sub: null
+      }
     ]
   },
   {
-    id: 'spiritual',
-    icon: '🕊',
-    title: 'الجانب الروحي والديني',
-    desc: 'القيم والمعتقدات المشتركة',
+    id: 'money',
+    icon: '💰',
+    title: 'المال والقرارات المالية',
+    desc: 'الخلافات المالية السبب الثاني للطلاق — بحث Dave Ramsey',
+    scoreKey: 'money',
     questions: [
-      { id: 'sp1', type: 'text', text: 'كيف تصف علاقتك بالله؟' },
       {
-        id: 'sp2', type: 'checkbox',
-        text: 'كيف تصف حياتك الروحية والدينية؟',
-        options: ['مهمة جداً وحيوية', 'تتفاوت حسب الظروف', 'ليست أولوية حالياً']
+        id: 'mn1', type: 'scale',
+        text: 'طريقتك في التعامل مع المال بشكل عام:',
+        scaleMin: 'أصرف وأستمتع بالحاضر',
+        scaleMax: 'أوفر وأخطط للمستقبل'
       },
       {
-        id: 'sp3', type: 'checkbox',
-        text: 'كيف تصف حياتكما الروحية معاً كزوجين؟',
-        options: ['مهمة جداً وحيوية', 'تتفاوت حسب الظروف', 'ليست أولوية حالياً']
+        id: 'mn2', type: 'scale',
+        text: 'كيف تتخيل إدارة ميزانية البيت؟',
+        scaleMin: 'أفضل أن يُدارها شخص واحد',
+        scaleMax: 'أفضل أن نخطط لها معاً'
       },
-      { id: 'sp4', type: 'text', text: 'هل تشعر أنكما متقاربان في مستواكما الديني؟ هل ثمة شيء في روحانية شريكك يجعلك تشعر بالإعجاب أو بشيء من التحدي؟' },
-      { id: 'sp5', type: 'text', text: 'ماذا يعني لك أن تكونا "متحدَين روحياً"؟ وماذا يعني لك مفهوم "القوامة" أو "الشراكة المتوازنة" في الزواج؟' },
-      { id: 'sp6', type: 'text', text: 'كيف تخططان لإدراج الجانب الروحي والديني في حياتكما اليومية والأسرية؟' },
-      { id: 'sp7', type: 'text', text: 'كيف يمكنك أن تساعد شريكك على النمو روحياً؟ وكيف قد تكون عائقاً أمامه في ذلك؟' },
-      { id: 'sp8', type: 'text', text: 'ما أفضل طريقة يمكن لشريكك من خلالها أن يساعدك على النمو روحياً؟' },
-      { id: 'sp9', type: 'text', text: 'هل تخططان للمشاركة كزوجين في مجتمع روحي أو ديني؟' },
+      {
+        id: 'mn3', type: 'text',
+        text: 'كيف تحب يكون دورك ودور شريكك في القرارات المالية الكبيرة — شراء سيارة، سفر، توفير؟',
+        sub: 'كيف تتخذون القرار معاً؟'
+      },
+      {
+        id: 'mn4', type: 'scale',
+        text: 'أهمية مستوى المعيشة والرفاهية في حياتك:',
+        scaleMin: 'البساطة تكفيني',
+        scaleMax: 'أهتم كثيراً بجودة الحياة'
+      },
+      {
+        id: 'mn5', type: 'text',
+        text: 'لو مررتم بضائقة مالية صعبة — كيف تتخيل تتعاملون معها كزوجين؟',
+        sub: null
+      }
+    ]
+  },
+  {
+    id: 'growth',
+    icon: '🌿',
+    title: 'النمو الشخصي والصداقة',
+    desc: 'الصداقة هي عماد الزواج السعيد — Gottman',
+    scoreKey: 'growth',
+    questions: [
+      {
+        id: 'gr1', type: 'text',
+        text: 'إيش أكثر شيء تحبه في شخصية شريكك — الشيء اللي يجذبك فعلاً؟',
+        sub: null
+      },
+      {
+        id: 'gr2', type: 'scale',
+        text: 'مدى اهتمامك بالنمو الشخصي والتطوير الذاتي:',
+        scaleMin: 'ما يشغلني كثيراً',
+        scaleMax: 'من أهم أولوياتي'
+      },
+      {
+        id: 'gr3', type: 'scale',
+        text: 'مدى راحتك لو طلب شريكك وقتاً لنفسه بعيداً عنك:',
+        scaleMin: 'يصعب عليّ',
+        scaleMax: 'طبيعي وصحي'
+      },
+      {
+        id: 'gr4', type: 'text',
+        text: 'كيف تتخيل تدعم شريكك في أحلامه وطموحاته حتى لو تعارضت مع راحتك؟',
+        sub: null
+      },
+      {
+        id: 'gr5', type: 'text',
+        text: 'إيش اللي تحتاجه شريكك يفهمه عنك — شيء ما تقدر تشرحه بسهولة؟',
+        sub: 'هذا سؤال من القلب'
+      }
     ]
   }
 ];
 
-// ===== STATE =====
-let currentRole = null;
-let userName = '';
-let currentView = 'fill';
-let cachedAnswers = { person1: {}, person2: {} };
-
-// ===== JSONBIN API =====
+// =====================
+// JSONBIN STORAGE
+// =====================
 const JSONBIN_KEY = '$2a$10$djAP1AYEicaZLWkdTTlzz.t0mj5rlzlKvaMugu0Fi82lNz7O/Uj7W';
 const JSONBIN_URL = 'https://api.jsonbin.io/v3/b';
 let binId = null;
+let cachedAnswers = { person1: {}, person2: {} };
+let currentRole = null;
+let currentView = 'fill';
 
 async function ensureBin() {
-  // Store bin ID in localStorage so we always use the same bin
   if (binId) return binId;
   binId = localStorage.getItem('questionnaire_bin_id');
   if (binId) return binId;
-
-  // Create new bin
   try {
     const res = await fetch(JSONBIN_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': JSONBIN_KEY,
-        'X-Bin-Name': 'questionnaire-aiman-lateefa',
-        'X-Bin-Private': 'true'
-      },
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY, 'X-Bin-Name': 'questionnaire-v2', 'X-Bin-Private': 'true' },
       body: JSON.stringify({ person1: {}, person2: {} })
     });
     const data = await res.json();
@@ -828,9 +576,7 @@ async function cloudGet() {
   try {
     const id = await ensureBin();
     if (!id) return null;
-    const res = await fetch(`${JSONBIN_URL}/${id}/latest`, {
-      headers: { 'X-Master-Key': JSONBIN_KEY }
-    });
+    const res = await fetch(`${JSONBIN_URL}/${id}/latest`, { headers: { 'X-Master-Key': JSONBIN_KEY } });
     const data = await res.json();
     return data.record || null;
   } catch { return null; }
@@ -840,33 +586,23 @@ async function cloudSet(role, answers) {
   try {
     const id = await ensureBin();
     if (!id) return;
-    // Get current data first
     const current = await cloudGet() || { person1: {}, person2: {} };
     current[role] = answers;
     await fetch(`${JSONBIN_URL}/${id}`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': JSONBIN_KEY
-      },
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
       body: JSON.stringify(current)
     });
   } catch {}
 }
 
-// Share bin ID with partner
-function getBinShareCode() {
-  return localStorage.getItem('questionnaire_bin_id') || '';
-}
+function getBinShareCode() { return localStorage.getItem('questionnaire_bin_id') || ''; }
 
 async function importBinCode(code) {
   const clean = code.trim();
   if (!clean) return false;
-  // Verify it works
   try {
-    const res = await fetch(`${JSONBIN_URL}/${clean}/latest`, {
-      headers: { 'X-Master-Key': JSONBIN_KEY }
-    });
+    const res = await fetch(`${JSONBIN_URL}/${clean}/latest`, { headers: { 'X-Master-Key': JSONBIN_KEY } });
     if (!res.ok) return false;
     binId = clean;
     localStorage.setItem('questionnaire_bin_id', clean);
@@ -874,125 +610,120 @@ async function importBinCode(code) {
   } catch { return false; }
 }
 
-// ===== ROLE SELECT =====
+// =====================
+// ROLE & LOAD
+// =====================
 async function selectRole(role) {
   currentRole = role;
   document.getElementById('btn-p1').classList.toggle('active', role === 'person1');
   document.getElementById('btn-p2').classList.toggle('active', role === 'person2');
-
-  showToast('⏳ جاري تحميل الإجابات...');
-
+  showToast('⏳ جاري التحميل...');
   const data = await cloudGet();
-  if (data) {
-    cachedAnswers.person1 = data.person1 || {};
-    cachedAnswers.person2 = data.person2 || {};
-  }
-
-  showToast('✅ تم التحميل');
-
-  document.getElementById('view-toggle').style.display = 'flex';
-  document.getElementById('save-section').style.display = 'block';
-
-  // Show share code UI
+  if (data) { cachedAnswers.person1 = data.person1 || {}; cachedAnswers.person2 = data.person2 || {}; }
+  showToast('✅ جاهز');
+  document.getElementById('view-toggle').classList.remove('hidden');
+  document.getElementById('save-section').classList.remove('hidden');
   renderShareSection();
   renderFillView();
-  if (currentView === 'compare') renderCompareView();
 }
 
-function saveName() {
-  userName = document.getElementById('user-name').value;
+// =====================
+// SHARE SECTION
+// =====================
+function renderShareSection() {
+  const sec = document.getElementById('share-section');
+  const code = getBinShareCode();
+  if (currentRole === 'person1') {
+    sec.innerHTML = `<div class="share-box">
+      <h3>🔗 شارك هذا الكود مع شريكك</h3>
+      <div class="code-display" id="bin-code">${code || 'جاري الإنشاء...'}</div>
+      <button class="share-btn primary" onclick="copyCode()">📋 نسخ الكود</button>
+    </div>`;
+  } else {
+    sec.innerHTML = `<div class="share-box">
+      <h3>🔗 أدخلي كود شريكك للتزامن</h3>
+      ${code ? '<p style="font-size:13px;color:#4a7a5a;margin-bottom:10px;">✅ متصلة بنفس قاعدة البيانات</p>' : ''}
+      <div class="import-wrap">
+        <label>الصق الكود هنا:</label>
+        <div class="import-row">
+          <input class="import-input" id="import-input" placeholder="الكود...">
+          <button class="share-btn primary" onclick="doImport()">ربط ✓</button>
+        </div>
+      </div>
+    </div>`;
+  }
 }
 
-async function saveAnswers() {
-  if (!currentRole) { showToast('اختر دورك أولاً'); return; }
-
-  showToast('⏳ جاري الحفظ...');
-
-  const answers = {};
-  sections.forEach(sec => {
-    sec.questions.forEach(q => {
-      if (q.type === 'checkbox') {
-        const checked = [];
-        document.querySelectorAll(`[data-qid="${q.id}"].checked`).forEach(el => {
-          checked.push(el.dataset.option);
-        });
-        answers[q.id] = checked;
-      } else {
-        const el = document.getElementById('ans_' + q.id);
-        if (el) answers[q.id] = el.value;
-      }
-    });
-  });
-
-  await cloudSet(currentRole, answers);
-  cachedAnswers[currentRole] = answers;
-  showToast('✅ تم الحفظ! لطيفة تقدر تشوف إجاباتك الآن');
+function copyCode() {
+  navigator.clipboard.writeText(getBinShareCode()).then(() => showToast('✅ تم نسخ الكود!'));
 }
 
-function loadAnswers(role) {
-  return cachedAnswers[role] || {};
+async function doImport() {
+  const input = document.getElementById('import-input').value.trim();
+  if (!input) { showToast('أدخلي الكود أولاً'); return; }
+  showToast('⏳ جاري الربط...');
+  const ok = await importBinCode(input);
+  if (ok) {
+    showToast('✅ تم الربط!');
+    renderShareSection();
+    const data = await cloudGet();
+    if (data) { cachedAnswers.person1 = data.person1 || {}; cachedAnswers.person2 = data.person2 || {}; }
+    renderFillView();
+  } else { showToast('❌ كود غير صحيح'); }
 }
 
-// ===== RENDER FILL =====
+// =====================
+// FILL VIEW
+// =====================
 function renderFillView() {
   const container = document.getElementById('fill-view');
-  if (!currentRole) { container.innerHTML = ''; return; }
-
-  const savedAnswers = loadAnswers(currentRole);
-
-  let html = '';
-  html += `<div class="info-banner">
-    أجب على الأسئلة بصدق واضغط حفظ 🌿<br>إجاباتك تُحفظ في السحابة ويقدر الطرف الآخر يشوفها من جهازه
-  </div>`;
+  if (!currentRole) return;
+  const saved = cachedAnswers[currentRole] || {};
+  let html = `<div class="info-banner">أجب بصدق واضغط حفظ 🌿<br><small>إجاباتك تُحفظ في السحابة ويقدر شريكك يشوفها من جهازه</small></div>`;
 
   sections.forEach((sec, si) => {
-    const answeredCount = sec.questions.filter(q => {
-      const a = savedAnswers[q.id];
-      return a && (Array.isArray(a) ? a.length > 0 : a.trim().length > 0);
+    const answered = sec.questions.filter(q => {
+      const a = saved[q.id];
+      return a && (Array.isArray(a) ? a.length > 0 : (typeof a === 'number' || a.trim().length > 0));
     }).length;
 
     html += `<div class="section-card">
       <div class="section-header" onclick="toggleSection('sec${si}')" id="sh_sec${si}">
         <div class="section-icon">${sec.icon}</div>
-        <div class="section-title">
-          <h3>${sec.title}</h3>
-          <p>${sec.desc}</p>
-        </div>
-        <span class="section-progress">${answeredCount}/${sec.questions.length}</span>
-        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="6,9 12,15 18,9"/>
-        </svg>
+        <div class="section-title"><h3>${sec.title}</h3><p>${sec.desc}</p></div>
+        <span class="section-progress">${answered}/${sec.questions.length}</span>
+        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"/></svg>
       </div>
       <div class="section-body" id="sec${si}">`;
 
     sec.questions.forEach((q, qi) => {
-      const savedVal = savedAnswers[q.id];
-      html += `<div class="question">
-        <div class="question-label">
-          <div class="question-num">${qi + 1}</div>
-          <span>${q.text}</span>
-        </div>`;
+      const val = saved[q.id];
+      html += `<div class="question"><div class="question-label"><div class="question-num">${qi+1}</div><span>${q.text}</span></div>`;
+      if (q.sub) html += `<div class="question-sub">${q.sub}</div>`;
 
-      if (q.type === 'checkbox') {
+      if (q.type === 'scale') {
+        html += `<div class="scale-wrap">
+          <div class="scale-labels"><span>${q.scaleMin}</span><span>${q.scaleMax}</span></div>
+          <div class="scale-options">`;
+        for (let i = 1; i <= 5; i++) {
+          html += `<button class="scale-btn${val === i ? ' selected' : ''}" data-qid="${q.id}" data-val="${i}" onclick="setScale(this)">${i}</button>`;
+        }
+        html += `</div></div>`;
+      } else if (q.type === 'checkbox') {
         html += `<div class="checkbox-group">`;
         q.options.forEach(opt => {
-          const isChecked = savedVal && savedVal.includes(opt);
-          html += `<label class="checkbox-item${isChecked ? ' checked' : ''}" data-qid="${q.id}" data-option="${opt}" onclick="toggleCheck(this)">
-            <div class="checkmark">${isChecked ? '✓' : ''}</div>
-            <span>${opt}</span>
-          </label>`;
+          const checked = val && val.includes(opt);
+          html += `<label class="checkbox-item${checked ? ' checked' : ''}" data-qid="${q.id}" data-option="${opt}" onclick="toggleCheck(this)">
+            <div class="checkmark">${checked ? '✓' : ''}</div><span>${opt}</span></label>`;
         });
         html += `</div>`;
       } else {
-        html += `<textarea id="ans_${q.id}" placeholder="اكتب إجابتك هنا...">${savedVal || ''}</textarea>`;
+        html += `<textarea id="ans_${q.id}" placeholder="اكتب هنا...">${val || ''}</textarea>`;
       }
-
       html += `</div>`;
     });
-
     html += `</div></div>`;
   });
-
   container.innerHTML = html;
 }
 
@@ -1004,173 +735,487 @@ function toggleSection(id) {
   header.classList.toggle('open', !isOpen);
 }
 
+function setScale(btn) {
+  btn.closest('.scale-options').querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
 function toggleCheck(el) {
   el.classList.toggle('checked');
   el.querySelector('.checkmark').textContent = el.classList.contains('checked') ? '✓' : '';
 }
 
-// ===== RENDER COMPARE =====
+// =====================
+// SAVE & RESET
+// =====================
+async function saveAnswers() {
+  if (!currentRole) { showToast('اختر دورك أولاً'); return; }
+  showToast('⏳ جاري الحفظ...');
+  const answers = {};
+  sections.forEach(sec => {
+    sec.questions.forEach(q => {
+      if (q.type === 'scale') {
+        const selected = document.querySelector(`.scale-btn.selected[data-qid="${q.id}"]`);
+        if (selected) answers[q.id] = parseInt(selected.dataset.val);
+      } else if (q.type === 'checkbox') {
+        const checked = [];
+        document.querySelectorAll(`[data-qid="${q.id}"].checked`).forEach(el => checked.push(el.dataset.option));
+        if (checked.length) answers[q.id] = checked;
+      } else {
+        const el = document.getElementById('ans_' + q.id);
+        if (el && el.value.trim()) answers[q.id] = el.value;
+      }
+    });
+  });
+  await cloudSet(currentRole, answers);
+  cachedAnswers[currentRole] = answers;
+  renderFillView();
+  showToast('✅ تم الحفظ!');
+}
+
+async function resetAnswers() {
+  if (!currentRole) return;
+  if (!confirm('هل أنت متأكد أنك تريد مسح إجاباتك؟')) return;
+  showToast('⏳ جاري المسح...');
+  await cloudSet(currentRole, {});
+  cachedAnswers[currentRole] = {};
+  renderFillView();
+  showToast('✅ تم المسح');
+}
+
+// =====================
+// COMPARE VIEW
+// =====================
 function renderCompareView() {
   const container = document.getElementById('compare-view');
-  const ans1 = loadAnswers('person1');
-  const ans2 = loadAnswers('person2');
-  const name1 = 'الخطيب';
-  const name2 = 'الخطيبة';
-
-  const has1 = Object.keys(ans1).length > 0;
-  const has2 = Object.keys(ans2).length > 0;
+  const a1 = cachedAnswers.person1 || {};
+  const a2 = cachedAnswers.person2 || {};
+  const has1 = Object.keys(a1).length > 0;
+  const has2 = Object.keys(a2).length > 0;
 
   if (!has1 && !has2) {
-    container.innerHTML = `<div class="info-banner" style="background:#fff8f0;border-color:#f5c6bc;color:#c06040;">
-      لم يُجب أحد بعد. يجب أن يُجيب كلاكما على الأسئلة ثم تحفظان الإجابات أولاً.
-    </div>`;
+    container.innerHTML = `<div class="warn-banner">لم يُجب أحد بعد — يجب أن تحفظ الإجابات أولاً</div>`;
     return;
   }
 
   let html = `<div class="info-banner">
-    <span class="saved-badge" style="background:var(--gold)">${has1 ? '✓' : '○'} ${name1}</span>
-    <span class="saved-badge" style="background:var(--rose)">${has2 ? '✓' : '○'} ${name2}</span>
-    <br>ناقشا الإجابات بهدوء وانفتاح 💬
+    <span style="background:var(--gold);color:white;padding:2px 12px;border-radius:50px;font-size:12px;font-weight:700;">${has1 ? '✓' : '○'} A</span>
+    &nbsp;
+    <span style="background:#d4846a;color:white;padding:2px 12px;border-radius:50px;font-size:12px;font-weight:700;">${has2 ? '✓' : '○'} Aة</span>
+    <br>ناقشا الفروقات بهدوء وفضول 💬
   </div>`;
 
   sections.forEach(sec => {
-    html += `<div class="compare-card">
-      <div class="compare-section-title">${sec.icon} ${sec.title}</div>`;
-
+    let secHtml = '';
     sec.questions.forEach((q, qi) => {
-      const a1 = ans1[q.id];
-      const a2 = ans2[q.id];
-      const hasAny = (a1 && (Array.isArray(a1) ? a1.length : a1.trim())) ||
-                     (a2 && (Array.isArray(a2) ? a2.length : a2.trim()));
-      if (!hasAny) return;
+      const v1 = a1[q.id], v2 = a2[q.id];
+      if (!v1 && !v2) return;
 
-      const fmt = (val) => {
-        if (!val) return '';
-        if (Array.isArray(val)) return val.length ? val.join(' • ') : '';
-        return val.trim();
+      const fmt = (v) => {
+        if (!v) return '';
+        if (Array.isArray(v)) return v.join(' • ');
+        if (typeof v === 'number') return v.toString();
+        return v.trim();
       };
 
-      html += `<div class="compare-question">
-        <div class="compare-q-text">${qi + 1}. ${q.text}</div>
-        <div class="compare-answers">
+      let answerHtml = '';
+      if (q.type === 'scale' && typeof v1 === 'number' && typeof v2 === 'number') {
+        const diff = Math.abs(v1 - v2);
+        const diffClass = diff === 0 ? 'diff-0' : diff === 1 ? 'diff-1' : diff === 2 ? 'diff-2' : 'diff-3';
+        const diffLabel = diff === 0 ? 'متطابق ✓' : diff === 1 ? 'قريب' : diff === 2 ? 'فرق ملحوظ' : 'فرق كبير';
+        answerHtml = `<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="scale-val p1">${v1 || '—'}</span>
+            <div style="font-size:12px;color:var(--gold);">A</div>
+          </div>
+          <span class="diff-badge ${diffClass}">${diffLabel}</span>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="font-size:12px;color:var(--rose);">L</div>
+            <span class="scale-val p2">${v2 || '—'}</span>
+          </div>
+        </div>`;
+      } else {
+        answerHtml = `<div class="compare-answers">
           <div class="answer-box person1">
-            <div class="answer-name">${name1} 💙</div>
-            <div class="answer-text">${fmt(a1) || '<span class="no-answer">لم يُجب بعد</span>'}</div>
+            <div class="answer-name">A 💙</div>
+            <div class="answer-text">${fmt(v1) || '<span class="no-answer">لم يجب بعد</span>'}</div>
           </div>
           <div class="answer-box person2">
-            <div class="answer-name">${name2} 🌸</div>
-            <div class="answer-text">${fmt(a2) || '<span class="no-answer">لم تُجب بعد</span>'}</div>
+            <div class="answer-name">L 🌸</div>
+            <div class="answer-text">${fmt(v2) || '<span class="no-answer">لم تجب بعد</span>'}</div>
           </div>
-        </div>
+        </div>`;
+      }
+
+      secHtml += `<div class="compare-question">
+        <div class="compare-q-text">${qi+1}. ${q.text}</div>
+        ${answerHtml}
       </div>`;
     });
 
-    html += `</div>`;
+    if (secHtml) {
+      html += `<div class="compare-card">
+        <div class="compare-section-title">${sec.icon} ${sec.title}</div>
+        ${secHtml}
+      </div>`;
+    }
   });
 
   container.innerHTML = html;
 }
 
-// ===== VIEW SWITCH =====
+// =====================
+// ANALYSIS
+// =====================
+function calcScore(a1, a2) {
+  const dimensions = {};
+  let totalMatch = 0, totalScaleQ = 0;
+
+  sections.forEach(sec => {
+    let secMatch = 0, secTotal = 0;
+    sec.questions.forEach(q => {
+      const v1 = a1[q.id], v2 = a2[q.id];
+      if (q.type === 'scale' && typeof v1 === 'number' && typeof v2 === 'number') {
+        const diff = Math.abs(v1 - v2);
+        const match = Math.max(0, (4 - diff) / 4);
+        secMatch += match;
+        secTotal++;
+        totalMatch += match;
+        totalScaleQ++;
+      }
+    });
+    dimensions[sec.id] = secTotal > 0 ? Math.round((secMatch / secTotal) * 100) : null;
+  });
+
+  const overall = totalScaleQ > 0 ? Math.round((totalMatch / totalScaleQ) * 100) : null;
+  return { overall, dimensions };
+}
+
+function getCoupleType(score) {
+  if (score >= 80) return { type: 'المتناغمان ✨', color: '#4a7a5a', desc: 'توافقكم عالٍ جداً في القيم والأولويات. هذا لا يعني غياب الخلافات — بل يعني أن عندكم أساس قوي لبناء عليه.' };
+  if (score >= 65) return { type: 'المتوازنان 🌿', color: '#6a8fa0', desc: 'عندكم توافق جيد في معظم المجالات مع بعض الفروقات الطبيعية التي يمكن التعامل معها بالحوار.' };
+  if (score >= 50) return { type: 'المكتشفان 🔍', color: '#a07850', desc: 'عندكم نقاط قوة وفروقات تستحق النقاش. الفروقات ليست عائقاً — بل فرصة لفهم بعض أعمق.' };
+  return { type: 'المتباينان 🌊', color: '#c06040', desc: 'هناك فروقات جوهرية تحتاج نقاشاً صريحاً وعميقاً قبل الزواج. هذا ليس حكماً — بل تنبيه مهم.' };
+}
+
+// =====================
+// ADVICE ENGINE
+// =====================
+const adviceDB = {
+  attachment: {
+    title: 'نمط التعلق العاطفي',
+    icon: '🔗',
+    why: 'بحث Hazan & Shaver أثبت أن اختلاف أنماط التعلق هو السبب الجذري لكثير من الخلافات العاطفية المتكررة.',
+    tips: [
+      { title: 'تكلموا عن احتياجاتكم بوضوح', body: 'بدلاً من توقع أن شريكك يعرف ما تحتاجه، قل بوضوح: "لما أكون متضايق أحتاج..." — هذا وحده يحل 60% من سوء الفهم.' },
+      { title: 'قاعدة "الوجود الآمن"', body: 'اتفقوا على كلمة أو إشارة تعني "أنا بحاجة لك الآن" — تساعد الشريك القلق على الشعور بالأمان بدون ضغط.' },
+      { title: 'احترموا الفرق في الحاجة للمساحة', body: 'من يحتاج وقتاً لوحده لا يعني أنه لا يحبك. ومن يحتاج القرب لا يعني أنه يخنقك. الفرق طبيعي — التفاهم المسبق يمنع الجرح.' },
+      { title: 'تمرين "خريطة الحب" من Gottman', body: 'كل أسبوع اسأل شريكك سؤالاً جديداً عن حياته الداخلية — أحلامه، مخاوفه، ما يسعده هذه الأيام. الزوجان السعداء يعرفون بعض بعمق.' }
+    ]
+  },
+  love: {
+    title: 'لغة الحب',
+    icon: '💛',
+    why: 'بحث Gary Chapman على آلاف الأزواج أثبت أن معظم الشعور بعدم الحب لا يأتي من غياب الحب — بل من إعطائه بالطريقة الخطأ.',
+    tips: [
+      { title: 'اعرف لغة شريكك — ثم تكلم بها', body: 'إذا كانت لغته الكلام الحلو وأنت تعبّر بالأفعال، سيحس بأنك لا تحبه رغم أنك تخدمه طوال اليوم. تعلّم لغته.' },
+      { title: 'قاعدة "5 مقابل 1" من Gottman', body: 'الأزواج السعداء عندهم 5 تفاعلات إيجابية مقابل كل تفاعل سلبي. ابدأ يومك بلمسة، كلمة، أو نظرة دافئة — هذا يبني رصيداً عاطفياً لوقت الخلاف.' },
+      { title: 'اسأل مباشرة', body: 'مرة كل شهر اسأل شريكك: "ما الشيء الذي لو فعلته لشعرت بأنك محبوب أكثر هذا الشهر؟" — السؤال المباشر أفضل من التخمين.' },
+      { title: 'لا تنتظر تحس بالرغبة لتعبّر', body: 'الأزواج الناجحون يُقررون التعبير عن الحب حتى في أوقات البرود — القرار الواعي يُعيد المشاعر، ليس العكس.' }
+    ]
+  },
+  communication: {
+    title: 'التواصل والخلاف',
+    icon: '💬',
+    why: 'Gottman تابع 3000 زوج لـ 40 سنة — وتوصّل إلى أن أسلوب الخلاف وليس موضوعه هو ما يحدد مصير الزواج.',
+    tips: [
+      { title: 'ابدأ بـ "أنا أحس" لا "أنت دائماً"', body: 'بدلاً من "أنت ما تسمعني" قل "أنا أحس بالإحباط لما يبدو أن كلامي ما وصل." الأول هجوم يُدافع عنه، الثاني باب مفتوح للحوار.' },
+      { title: 'قاعدة التوقف الـ 20 دقيقة', body: 'لما ترتفع حرارة النقاش، اتفقوا على توقف 20 دقيقة — ليس هرباً بل راحة عصبية حقيقية. الدماغ يحتاج هذا الوقت ليهدأ فعلاً.' },
+      { title: 'الـ 69% من المشاكل لا تُحَل', body: 'Gottman اكتشف أن 69% من خلافات الأزواج لا تُحَل نهائياً — ولكن الأزواج السعداء تعلّموا كيف يتعايشون معها باحترام وفكاهة.' },
+      { title: 'أنهِ كل خلاف بـ "جسر"', body: 'بعد الخلاف قل شيئاً يُعيد الدفء: لمسة على الكتف، "أنا أحبك رغم اختلافنا"، أو حتى نكتة صغيرة. هذا "الإصلاح" هو ما يميز الأزواج السعداء.' }
+    ]
+  },
+  values: {
+    title: 'القيم والأولويات',
+    icon: '🧭',
+    why: 'بحث PREPARE/ENRICH على 50,000 زوج أثبت أن التوافق في القيم الجوهرية هو أقوى مؤشر على الرضا الزوجي طويل المدى.',
+    tips: [
+      { title: 'ميّزوا بين القيم الجوهرية والتفضيلات', body: 'القيمة الجوهرية (كالدين أو الأمانة) لا تُساوَم — لكن التفضيل (كطريقة قضاء الإجازة) قابل للتفاوض. الخلط بينهما يُضخّم الخلافات.' },
+      { title: 'ابنوا رؤية مشتركة للمستقبل', body: 'اجلسوا معاً وارسموا "صورة حياتنا بعد 10 سنين" — الوصف المشترك للمستقبل يحوّل الاختلافات الصغيرة إلى تفاصيل قابلة للحل.' },
+      { title: 'احتفلوا بالاختلاف الصحي', body: 'الاختلاف في بعض الأولويات ليس عيباً — بل يُثري العلاقة. الخطر الحقيقي هو التظاهر بالاتفاق ثم الانفجار لاحقاً.' },
+      { title: 'تمرين "لماذا نحن معاً"', body: 'كل ستة أشهر اكتب 5 أسباب تجعل علاقتكما تستحق — وشارك شريكك قائمتك. هذا التمرين يُعيد تحديد القيم المشتركة ويُرسّخ الالتزام.' }
+    ]
+  },
+  family: {
+    title: 'العائلة وتوقعات الزواج',
+    icon: '🏡',
+    why: 'بحث Bowen Theory يُثبت أن الأنماط العاطفية تنتقل عبر الأجيال — فهم هذا يكسر الحلقة ويمنع تكرار ما لم يُعجبك في طفولتك.',
+    tips: [
+      { title: 'تكلموا عن توقعاتكم من أهل بعض', body: 'اتفقوا مسبقاً على حدود واضحة مع الأهل — لا لرفضهم بل لحماية بيتكم. الحدود الواضحة تمنع 80% من مشاكل الأهل.' },
+      { title: 'لا تُقارنوا بيتكم ببيت الأهل', body: 'كل بيت له ثقافته الخاصة — ما كان طبيعياً في بيت والديك قد يكون غريباً لشريكك، والعكس. الفضول أفضل من الحكم.' },
+      { title: 'تمرين "الجرح القديم"', body: 'بهدوء وفي وقت مناسب، أخبر شريكك عن شيء في طفولتك جعلك تتصرف بطريقة معينة اليوم. هذا الانكشاف يبني الثقة ويمنع سوء التفسير.' },
+      { title: 'الزوج الواحد يُقرر — لا الأهل', body: 'عند الخلاف الداخلي، الحكم لكما أنتما — ليس لأي طرف خارجي. الزواج الناجح يبني ولاءً أولياً بين الزوجين.' }
+    ]
+  },
+  children: {
+    title: 'الأطفال والتربية',
+    icon: '🌱',
+    why: 'بحث Gottman أثبت أن الخلاف على تربية الأطفال يرتفع بعد الإنجاب مباشرة — والأزواج الذين ناقشوه مسبقاً يتعاملون معه بشكل أفضل بكثير.',
+    tips: [
+      { title: 'اتفقوا على المبادئ لا التفاصيل', body: 'لا يمكن الاتفاق على كل موقف مسبقاً — لكن الاتفاق على المبادئ الكبرى (الاحترام، الحب، الحدود) يجعل القرارات اليومية أسهل.' },
+      { title: 'الجبهة الموحدة أمام الأطفال', body: 'حتى لو اختلفتما — لا تختلفوا أمام الطفل. ناقشوا خلافاتكم في التربية على انفراد ثم اتخذوا موقفاً موحداً.' },
+      { title: 'راجعوا أسلوبكم دورياً', body: 'كل 6 أشهر اجلسوا معاً وراجعوا: ما الذي يعمل؟ ما الذي نريد تغييره؟ التربية رحلة متطورة لا وصفة ثابتة.' },
+      { title: 'الزواج الصحي هو أفضل هدية للأطفال', body: 'بحث Cummings أثبت أن الأطفال يتأثرون بجو الزواج أكثر من أي أسلوب تربوي — علاقتكما هي أساس تربيتهم.' }
+    ]
+  },
+  money: {
+    title: 'المال والقرارات المالية',
+    icon: '💰',
+    why: 'بحث Dave Ramsey على 10,000 زوج: الخلافات المالية هي السبب الثاني للطلاق — لكنها أيضاً من أكثر المشاكل قابلية للحل بالتفاهم المسبق.',
+    tips: [
+      { title: 'اجتماع مالي شهري', body: 'خصصوا 30 دقيقة كل شهر لمراجعة الوضع المالي معاً — ليس محاسبة بل شراكة. الشفافية المالية تبني الثقة وتمنع المفاجآت.' },
+      { title: 'حددوا "مبلغ الحرية"', body: 'اتفقوا على مبلغ يقدر كل واحد ينفقه بحرية دون الرجوع للآخر — هذا يمنع الإحساس بالرقابة ويحترم استقلالية كل طرف.' },
+      { title: 'أهداف مالية مشتركة', body: 'اكتبوا معاً 3 أهداف مالية للسنة القادمة — بيت، سفر، توفير. الهدف المشترك يجعل قرارات الإنفاق "نحن" بدلاً من "أنت وأنا".' },
+      { title: 'لا تحكموا على بعض بالأرقام', body: 'المدخر لا يعني "بخيل" والمنفق لا يعني "مسرف" — كل شخص له علاقة مع المال شكّلتها تجاربه. افهموا العلاقة لا الرقم.' }
+    ]
+  },
+  growth: {
+    title: 'النمو الشخصي والصداقة',
+    icon: '🌿',
+    why: 'Gottman يقول: "الصداقة هي أساس الزواج الرومانسي الناجح" — والأزواج الذين يصفون شريكهم كأفضل صديق لديهم رضا زوجي أعلى بمرتين.',
+    tips: [
+      { title: 'كونوا فضوليين على بعض دائماً', body: 'الخطأ الأكبر في الزواج هو الاعتقاد بأنك "تعرف" شريكك تماماً. الناس تتغير — اسأل، اكتشف، انبهر من جديد.' },
+      { title: 'ادعموا أحلام بعض حتى لو ما فهمتوها', body: 'بحث Gottman: الأزواج الذين يدعمون أحلام بعض — حتى الأحلام الغريبة — يتمتعون برضا أعلى بكثير. الدعم لا يعني الاتفاق.' },
+      { title: 'خصصوا وقتاً للصداقة لا فقط للإدارة', body: 'معظم الأزواج يتكلمون فقط عن اللوجستيات — أكل، أطفال، مواعيد. خصصوا وقتاً تتكلمون فيه كأصدقاء: أحلام، ذكريات، ضحكات.' },
+      { title: 'احتفلوا بنجاحات بعض', body: 'بحث Shelly Gable: طريقة تفاعل الزوج مع الأخبار الجيدة لشريكه أهم من تعاطفه مع الأخبار السيئة. افرح لشريكك بحماس حقيقي.' }
+    ]
+  }
+};
+
+function buildAdvice(overall, dimensions) {
+  // Find weak areas (score < 65)
+  const weakAreas = sections
+    .filter(sec => dimensions[sec.id] !== null && dimensions[sec.id] < 65)
+    .sort((a, b) => dimensions[a.id] - dimensions[b.id]);
+
+  if (weakAreas.length === 0 && overall >= 80) {
+    // High overall — give general maintenance tips
+    return `<div class="analysis-wrap" style="margin-top:24px;">
+      <div class="analysis-title" style="font-size:17px;">🌟 نصائح للحفاظ على ما بنيتموه</div>
+      <div class="analysis-sub">توافقكم ممتاز — هذه النصائح تُبقيه كذلك</div>
+      <div class="advice-tip">
+        <div class="advice-tip-title">💬 لا تتوقفوا عن التعرف على بعض</div>
+        <div class="advice-tip-body">الزواج الناجح ليس وجهة — هو رحلة مستمرة. استمروا في طرح الأسئلة العميقة وإن كنتم تعتقدون أنكم تعرفون الإجابات. الناس تتغير.</div>
+      </div>
+      <div class="advice-tip">
+        <div class="advice-tip-title">🔁 قاعدة الـ 5:1 من Gottman</div>
+        <div class="advice-tip-body">حافظوا على نسبة 5 تفاعلات إيجابية مقابل كل تفاعل سلبي — هذه القاعدة هي ما يميّز الأزواج السعداء في أبحاث Gottman على مدى 40 سنة.</div>
+      </div>
+      <div class="advice-tip">
+        <div class="advice-tip-title">📅 موعد أسبوعي ثابت</div>
+        <div class="advice-tip-body">بحث Gottman أثبت أن الأزواج الذين يخصصون وقتاً أسبوعياً ثابتاً لبعض — بعيداً عن الأطفال والهاتف — يُحافظون على مستوى الرضا حتى في سنوات الضغط.</div>
+      </div>
+    </div>`;
+  }
+
+  let html = `<div class="analysis-wrap" style="margin-top:24px;">
+    <div class="analysis-title" style="font-size:17px;">🛠 كيف تعملون على نقاط الضعف؟</div>
+    <div class="analysis-sub">نصائح مبنية على الأبحاث — خصيصاً لنتيجتكم</div>`;
+
+  // General intro based on overall score
+  if (overall < 50) {
+    html += `<div style="background:#fff0e8;border:1px solid #f5c6a0;border-radius:14px;padding:16px;margin-bottom:24px;font-size:14px;color:#7a3a10;line-height:1.8;">
+      <strong>ملاحظة مهمة:</strong> وجود فروقات كبيرة قبل الزواج ليس نهاية الطريق — لكنه إشارة واضحة أن هناك محادثات جوهرية يجب أن تحدث <strong>قبل</strong> الزواج لا بعده. الصراحة الآن أرحم من المفاجأة لاحقاً.
+    </div>`;
+  } else if (overall < 65) {
+    html += `<div style="background:#fdf8f0;border:1px solid #e8d5b0;border-radius:14px;padding:16px;margin-bottom:24px;font-size:14px;color:#6b4c35;line-height:1.8;">
+      الفروقات التي ظهرت طبيعية وقابلة للتعامل معها — لكنها تحتاج <strong>نقاشاً صادقاً وصبراً</strong>. الأزواج الذين يعملون على هذه المجالات قبل الزواج يُوفّرون على أنفسهم سنوات من سوء الفهم.
+    </div>`;
+  }
+
+  weakAreas.slice(0, 4).forEach(sec => {
+    const advice = adviceDB[sec.id];
+    if (!advice) return;
+    const score = dimensions[sec.id];
+    const urgency = score < 45 ? '#ffe8e8' : '#fff8f0';
+    const urgencyBorder = score < 45 ? '#f5b0b0' : '#f5d5b0';
+
+    html += `<div style="border:1.5px solid ${urgencyBorder};background:${urgency};border-radius:18px;padding:20px 22px;margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+        <span style="font-size:22px;">${advice.icon}</span>
+        <span style="font-size:16px;font-weight:800;color:var(--deep);">${advice.title}</span>
+        <span style="margin-right:auto;font-size:12px;font-weight:700;background:white;padding:3px 10px;border-radius:50px;color:${score < 45 ? '#c06040' : '#a07850'};">${score}%</span>
+      </div>
+      <div style="font-size:13px;color:var(--soft);margin-bottom:14px;line-height:1.7;border-right:3px solid ${urgencyBorder};padding-right:10px;">
+        📖 <em>${advice.why}</em>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px;">`;
+
+    advice.tips.forEach(tip => {
+      html += `<div class="advice-tip">
+        <div class="advice-tip-title">✦ ${tip.title}</div>
+        <div class="advice-tip-body">${tip.body}</div>
+      </div>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  html += `</div>`;
+  return html;
+}
+
+function renderAnalysisView() {
+  const container = document.getElementById('analysis-view');
+  const a1 = cachedAnswers.person1 || {};
+  const a2 = cachedAnswers.person2 || {};
+  const has1 = Object.keys(a1).length > 0;
+  const has2 = Object.keys(a2).length > 0;
+
+  if (!has1 || !has2) {
+    container.innerHTML = `<div class="warn-banner">يجب أن يُجيب الطرفان ويحفظا إجاباتهما أولاً لعرض التحليل</div>`;
+    return;
+  }
+
+  const { overall, dimensions } = calcScore(a1, a2);
+
+  if (overall === null) {
+    container.innerHTML = `<div class="warn-banner">يجب الإجابة على أسئلة المقياس (1-5) لحساب نسبة التوافق</div>`;
+    return;
+  }
+
+  const couple = getCoupleType(overall);
+  const scoreColor = overall >= 80 ? '#4a7a5a' : overall >= 65 ? '#6a8fa0' : overall >= 50 ? '#a07850' : '#c06040';
+
+  // Strengths & growth
+  const strengths = [], growth = [];
+  sections.forEach(sec => {
+    const d = dimensions[sec.id];
+    if (d === null) return;
+    if (d >= 75) strengths.push({ icon: sec.icon, name: sec.title, score: d });
+    else if (d < 60) growth.push({ icon: sec.icon, name: sec.title, score: d });
+  });
+
+  // Open answers highlights
+  const openHighlights = [];
+  const importantOpen = ['at5', 'lv4', 'cm5', 'vl6', 'fm5', 'gr5'];
+  importantOpen.forEach(qid => {
+    const sec = sections.find(s => s.questions.find(q => q.id === qid));
+    const q = sec?.questions.find(q => q.id === qid);
+    const v1 = a1[qid], v2 = a2[qid];
+    if (q && (v1 || v2)) openHighlights.push({ q, v1, v2, secIcon: sec.icon });
+  });
+
+  let html = `<div class="analysis-wrap">
+    <div class="analysis-title">تحليل التوافق 📊</div>
+    <div class="analysis-sub">مبني على أبحاث PREPARE/ENRICH و Gottman Institute</div>
+
+    <div class="score-circle-wrap">
+      <div class="score-circle" style="border-color:${scoreColor}20;">
+        <div class="score-num" style="color:${scoreColor}">${overall}%</div>
+        <div class="score-label">نسبة التوافق</div>
+      </div>
+    </div>
+
+    <div class="couple-type">
+      <div class="couple-type-badge" style="background:${couple.color}">${couple.type}</div>
+      <p>${couple.desc}</p>
+    </div>
+
+    <div class="dimensions-grid">`;
+
+  sections.forEach(sec => {
+    const d = dimensions[sec.id];
+    if (d === null) return;
+    const barColor = d >= 75 ? '#6a9e7a' : d >= 55 ? '#c9a96e' : '#d4846a';
+    html += `<div class="dim-card">
+      <div class="dim-icon">${sec.icon}</div>
+      <div class="dim-name">${sec.title}</div>
+      <div class="dim-bar-bg"><div class="dim-bar-fill" style="width:${d}%;background:${barColor}"></div></div>
+      <div class="dim-score">${d}%</div>
+    </div>`;
+  });
+
+  html += `</div>`;
+
+  if (strengths.length > 0) {
+    html += `<div class="analysis-section">
+      <h3>💪 نقاط قوتكم معاً</h3>`;
+    strengths.forEach(s => {
+      html += `<div class="strength-item">${s.icon} <strong>${s.name}</strong> — توافقكم فيه ممتاز (${s.score}%)</div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (growth.length > 0) {
+    html += `<div class="analysis-section">
+      <h3>🌱 مجالات تحتاج نقاشاً أعمق</h3>`;
+    growth.forEach(g => {
+      html += `<div class="growth-item">${g.icon} <strong>${g.name}</strong> — فيه فروقات تستحق الحوار (${g.score}%)</div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (openHighlights.length > 0) {
+    html += `<div class="analysis-section">
+      <h3>💬 إجابات تستحق نقاشاً</h3>
+      <p style="font-size:13px;color:var(--soft);margin-bottom:12px;">هذه أهم الأسئلة المفتوحة التي تكشف الفكر العميق لكل طرف:</p>`;
+    openHighlights.forEach(item => {
+      if (!item.v1 && !item.v2) return;
+      html += `<div style="margin-bottom:20px;">
+        <div style="font-size:14px;font-weight:700;color:var(--deep);margin-bottom:10px;">${item.secIcon} ${item.q.text}</div>
+        <div class="compare-answers">
+          <div class="answer-box person1"><div class="answer-name">A 💙</div><div class="answer-text">${item.v1 || '<span class="no-answer">—</span>'}</div></div>
+          <div class="answer-box person2"><div class="answer-name">L 🌸</div><div class="answer-text">${item.v2 || '<span class="no-answer">—</span>'}</div></div>
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // ---- ADVICE SECTION ----
+  html += buildAdvice(overall, dimensions);
+
+  html += `<div style="background:var(--warm);border-radius:14px;padding:16px;margin-top:8px;">
+    <p style="font-size:13px;color:var(--mid);line-height:1.8;text-align:center;">
+      ⚠️ هذا التحليل أداة للنقاش والفهم — وليس حكماً نهائياً على علاقتكم.<br>
+      كل زواج ناجح يُبنى على الحوار الصادق والنية الصادقة.
+    </p>
+  </div>`;
+
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+// =====================
+// VIEW SWITCH
+// =====================
 async function switchView(view) {
   currentView = view;
-  document.getElementById('toggle-fill').classList.toggle('active', view === 'fill');
-  document.getElementById('toggle-compare').classList.toggle('active', view === 'compare');
-  document.getElementById('fill-view').classList.toggle('hidden', view !== 'fill');
-  document.getElementById('compare-view').classList.toggle('hidden', view !== 'compare');
-  document.getElementById('save-section').style.display = view === 'fill' ? 'block' : 'none';
+  ['fill','compare','analysis'].forEach(v => {
+    document.getElementById(v + '-view').classList.toggle('hidden', v !== view);
+    document.getElementById('toggle-' + v).classList.toggle('active', v === view);
+  });
+  document.getElementById('save-section').classList.toggle('hidden', view !== 'fill');
 
-  if (view === 'compare') {
-    showToast('⏳ جاري تحميل إجابات الطرفين...');
+  if (view === 'compare' || view === 'analysis') {
+    showToast('⏳ جاري التحميل...');
     const data = await cloudGet();
-    if (data) {
-      cachedAnswers.person1 = data.person1 || {};
-      cachedAnswers.person2 = data.person2 || {};
-    }
-    renderCompareView();
+    if (data) { cachedAnswers.person1 = data.person1 || {}; cachedAnswers.person2 = data.person2 || {}; }
+    if (view === 'compare') renderCompareView();
+    else renderAnalysisView();
   }
 }
 
-// ===== TOAST =====
+// =====================
+// TOAST
+// =====================
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2800);
 }
-
-// ===== SHARE SECTION =====
-function renderShareSection() {
-  const sec = document.getElementById('share-section');
-  sec.style.display = 'block';
-  const code = getBinShareCode();
-
-  if (currentRole === 'person1') {
-    // أيمن — يعرض الكود ليشاركه
-    sec.innerHTML = `<div class="share-box">
-      <h3>🔗 شارك هذا الكود مع لطيفة</h3>
-      <div class="code-display" id="bin-code">${code || 'جاري الإنشاء...'}</div>
-      <div class="share-actions">
-        <button class="share-btn primary" onclick="copyCode()">📋 نسخ الكود</button>
-      </div>
-    </div>`;
-  } else {
-    // لطيفة — تدخل الكود
-    sec.innerHTML = `<div class="share-box">
-      <h3>🔗 أدخلي كود أيمن للتزامن</h3>
-      ${code ? `<p style="font-size:13px;color:var(--green);margin-bottom:10px;">✅ متصلة بنفس قاعدة البيانات</p>` : ''}
-      <div class="import-wrap visible">
-        <label>الصق الكود الذي أرسله لك أيمن:</label>
-        <div class="import-row">
-          <input class="import-input" id="import-input" placeholder="الكود هنا...">
-          <button class="share-btn primary" onclick="doImport()">ربط ✓</button>
-        </div>
-      </div>
-    </div>`;
-  }
-}
-
-function copyCode() {
-  const code = getBinShareCode();
-  navigator.clipboard.writeText(code).then(() => showToast('✅ تم نسخ الكود!'));
-}
-
-async function doImport() {
-  const input = document.getElementById('import-input').value.trim();
-  if (!input) { showToast('أدخلي الكود أولاً'); return; }
-  showToast('⏳ جاري الربط...');
-  const ok = await importBinCode(input);
-  if (ok) {
-    showToast('✅ تم الربط! إجاباتك ستتزامن مع أيمن');
-    renderShareSection();
-    // Reload answers
-    const data = await cloudGet();
-    if (data) {
-      cachedAnswers.person1 = data.person1 || {};
-      cachedAnswers.person2 = data.person2 || {};
-    }
-    renderFillView();
-  } else {
-    showToast('❌ الكود غير صحيح، حاولي مرة ثانية');
-  }
-}
-
-async function resetAnswers() {
-  if (!currentRole) return;
-  const who = currentRole === 'person1' ? 'الخطيب' : 'الخطيبة';
-  if (!confirm(`هل أنت متأكد أنك تريد مسح إجابات ${who}؟`)) return;
-  showToast('⏳ جاري المسح...');
-  await cloudSet(currentRole, {});
-  cachedAnswers[currentRole] = {};
-  renderFillView();
-  showToast('✅ تم مسح إجاباتك');
-}
-
-// Init
-document.getElementById('fill-view').innerHTML = `
-  <div class="info-banner">
-    اختر دورك في الأعلى للبدء في الإجابة على الأسئلة ✨
-  </div>`;
 </script>
 </body>
 </html>
