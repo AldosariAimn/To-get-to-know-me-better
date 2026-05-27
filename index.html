@@ -598,6 +598,7 @@
 
   <div class="save-section" id="save-section" style="display:none">
     <button class="save-btn" onclick="saveAnswers()">💾 حفظ إجاباتي</button>
+    <button class="save-btn" onclick="resetAnswers()" style="background:white;color:#d4846a;border:2px solid #d4846a;margin-top:12px;">🗑 مسح إجاباتي</button>
   </div>
 </div>
 
@@ -1152,6 +1153,17 @@ async function doImport() {
   } else {
     showToast('❌ الكود غير صحيح، حاولي مرة ثانية');
   }
+}
+
+async function resetAnswers() {
+  if (!currentRole) return;
+  const who = currentRole === 'person1' ? 'الخطيب' : 'الخطيبة';
+  if (!confirm(`هل أنت متأكد أنك تريد مسح إجابات ${who}؟`)) return;
+  showToast('⏳ جاري المسح...');
+  await cloudSet(currentRole, {});
+  cachedAnswers[currentRole] = {};
+  renderFillView();
+  showToast('✅ تم مسح إجاباتك');
 }
 
 // Init
